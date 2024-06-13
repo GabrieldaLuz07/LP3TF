@@ -20,15 +20,15 @@ const postAluno = async (req, res, next) => {
       return res.status(400).json({ erro });
     }
 
-    // const status = await statusService.getById(req.params.id_status);
-    // if (!status) {
-    //   return res.status(404).json({ message: 'Status não encontrado' });
-    // }
+    const status = await statusService.getById(req.params.id_status);
+    if (!status) {
+      return res.status(404).json({ message: 'Status não encontrado' });
+    }
 
-    // const plano = await planoService.getById(req.params.id_plano);
-    // if (!plano) {
-    //   return res.status(404).json({ message: 'Plano não encontrado' });
-    // }
+    const plano = await planoService.getById(req.params.id_plano);
+    if (!plano) {
+      return res.status(404).json({ message: 'Plano não encontrado' });
+    }
 
     const retorno = await alunoService.postAluno(req.body)
     res.status(201).send(retorno);

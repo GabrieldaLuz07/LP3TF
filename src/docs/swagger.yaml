@@ -171,6 +171,9 @@
           "401": {
             "description": "Não autorizado"
           },
+          "404": {
+            "description": "Não Encontrado"
+          },
           "500": {
             "description": "Erro interno do servidor."
           }
@@ -724,11 +727,11 @@
         "tags": [
           "Aluno plano"
         ],
-        "summary": "Obter todas as associações aluno_plano",
-        "description": "Endpoint para obter a lista de todas as associações aluno_plano.",
+        "summary": "Obter todas as associações do plano do aluno",
+        "description": "Endpoint para obter a lista de todas as associações do plano do aluno.",
         "responses": {
           "200": {
-            "description": "Lista de associações aluno_plano obtida com sucesso.",
+            "description": "Lista de associações do plano do aluno obtida com sucesso.",
             "schema": {
               "type": "array",
               "items": {
@@ -777,13 +780,13 @@
         "tags": [
           "Aluno plano"
         ],
-        "summary": "Adicionar uma nova associação aluno_plano",
-        "description": "Endpoint para adicionar uma nova associação aluno_plano.",
+        "summary": "Adicionar uma nova associação do plano do aluno",
+        "description": "Endpoint para adicionar uma nova associação do plano do aluno.",
         "parameters": [
           {
             "name": "body",
             "in": "body",
-            "description": "Dados da nova associação aluno_plano a ser inserida",
+            "description": "Dados da nova associação do plano do aluno a ser inserida",
             "required": true,
             "schema": {
               "type": "object",
@@ -814,7 +817,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Associação aluno_plano criada com sucesso."
+            "description": "Associação do plano do aluno criada com sucesso."
           },
           "400": {
             "description": "Dados inválidos."
@@ -836,20 +839,20 @@
         "tags": [
           "Aluno plano"
         ],
-        "summary": "Deletar uma associação aluno_plano",
-        "description": "Endpoint para deletar uma associação aluno_plano existente.",
+        "summary": "Deletar uma associação do plano do aluno",
+        "description": "Endpoint para deletar uma associação do plano do aluno existente.",
         "parameters": [
           {
             "name": "id_aluno_plano",
             "in": "path",
             "required": true,
             "type": "integer",
-            "description": "ID da associação aluno_plano a ser deletada"
+            "description": "ID da associação do plano do aluno a ser deletada"
           }
         ],
         "responses": {
           "200": {
-            "description": "Associação aluno_plano deletada com sucesso."
+            "description": "Associação do plano do aluno deletada com sucesso."
           },
           "204": {
             "description": "Nenhum Conteúdo"
@@ -858,7 +861,7 @@
             "description": "Não autorizado"
           },
           "404": {
-            "description": "Associação aluno_plano não encontrada."
+            "description": "Associação do plano do aluno não encontrada."
           },
           "500": {
             "description": "Erro interno do servidor."
@@ -869,20 +872,20 @@
         "tags": [
           "Aluno plano"
         ],
-        "summary": "Atualizar uma associação aluno_plano",
-        "description": "Endpoint para atualizar as informações de uma associação aluno_plano existente.",
+        "summary": "Atualizar uma associação do plano do aluno",
+        "description": "Endpoint para atualizar as informações de uma associação do plano do aluno existente.",
         "parameters": [
           {
             "name": "id_aluno_plano",
             "in": "path",
             "required": true,
             "type": "integer",
-            "description": "ID da associação aluno_plano a ser atualizada"
+            "description": "ID da associação do plano do aluno a ser atualizada"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Dados atualizados da associação aluno_plano",
+            "description": "Dados atualizados da associação do plano do aluno",
             "required": true,
             "schema": {
               "type": "object",
@@ -913,7 +916,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Associação aluno_plano atualizada com sucesso."
+            "description": "Associação do plano do aluno atualizada com sucesso."
           },
           "400": {
             "description": "Dados inválidos."
@@ -922,7 +925,7 @@
             "description": "Não autorizado"
           },
           "404": {
-            "description": "Associação aluno_plano não encontrada."
+            "description": "Associação do plano do aluno não encontrada."
           },
           "500": {
             "description": "Erro interno do servidor."
@@ -933,20 +936,20 @@
         "tags": [
           "Aluno plano"
         ],
-        "summary": "Atualização parcial de uma associação aluno_plano",
-        "description": "Endpoint para atualização parcial das informações de uma associação aluno_plano existente.",
+        "summary": "Atualização parcial de uma associação do plano do aluno",
+        "description": "Endpoint para atualização parcial das informações de uma associação do plano do aluno existente.",
         "parameters": [
           {
             "name": "id_aluno_plano",
             "in": "path",
             "required": true,
             "type": "integer",
-            "description": "ID da associação aluno_plano a ser atualizada"
+            "description": "ID da associação do plano do aluno a ser atualizada"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Dados parciais atualizados da associação aluno_plano",
+            "description": "Dados parciais atualizados da associação do plano do aluno",
             "required": true,
             "schema": {
               "type": "object",
@@ -977,7 +980,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Associação aluno_plano atualizada com sucesso."
+            "description": "Associação do plano do aluno atualizada com sucesso."
           },
           "400": {
             "description": "Dados inválidos."
@@ -986,7 +989,7 @@
             "description": "Não autorizado"
           },
           "404": {
-            "description": "Associação aluno_plano não encontrada."
+            "description": "Associação do plano do aluno não encontrada."
           },
           "500": {
             "description": "Erro interno do servidor."
