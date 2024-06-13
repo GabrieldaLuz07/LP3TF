@@ -1,0 +1,2575 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Trabalho Final LP3",
+    "description": "Documentação do trabalho final"
+  },
+  "host": "localhost:3000",
+  "basePath": "",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "summary": "Autenticação do usuário",
+        "description": "",
+        "parameters": [
+          {
+            "name": "json",
+            "in": "body",
+            "description": "Dados para autenticar o usuário",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cpf": {
+                  "type": "string",
+                  "example": "123.456.789-10"
+                },
+                "senha": {
+                  "type": "string",
+                  "example": "senha123"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário logado com sucesso"
+          },
+          "401": {
+            "description": "Usuário sem permissão"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          },
+          "500": {
+            "description": "Erro de servidor"
+          }
+        }
+      }
+    },
+    "/aluno": {
+      "get": {
+        "tags": [
+          "Aluno"
+        ],
+        "summary": "Obter todos os alunos",
+        "description": "Endpoint para obter a lista de todos os alunos.",
+        "responses": {
+          "200": {
+            "description": "Lista de alunos obtida com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "nome": {
+                    "type": "string",
+                    "example": "João Silva"
+                  },
+                  "cpf": {
+                    "type": "string",
+                    "example": "123.456.789-00"
+                  },
+                  "nascimento": {
+                    "type": "string",
+                    "example": "2000-01-01"
+                  },
+                  "sexo": {
+                    "type": "string",
+                    "example": "Masculino"
+                  },
+                  "endereco": {
+                    "type": "string",
+                    "example": "Rua A, 123"
+                  },
+                  "telefone": {
+                    "type": "string",
+                    "example": "1234-5678"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Aluno"
+        ],
+        "summary": "Adicionar um novo aluno",
+        "description": "Endpoint para adicionar um novo aluno.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do novo aluno a ser inserido",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "João Gabriel"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "123.456.789-00"
+                },
+                "nascimento": {
+                  "type": "string",
+                  "example": "2000-01-01"
+                },
+                "sexo": {
+                  "type": "string",
+                  "example": "M"
+                },
+                "endereco": {
+                  "type": "string",
+                  "example": "Rua B, 456"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "9876-5432"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Aluno criado com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/aluno/{id_aluno}": {
+      "delete": {
+        "tags": [
+          "Aluno"
+        ],
+        "summary": "Deletar um aluno",
+        "description": "Endpoint para deletar um aluno existente.",
+        "parameters": [
+          {
+            "name": "id_aluno",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do aluno a ser deletado"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Aluno deletado com sucesso."
+          },
+          "204": {
+            "description": "Nenhum Conteúdo"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Aluno não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Aluno"
+        ],
+        "summary": "Atualizar um aluno",
+        "description": "Endpoint para atualizar as informações de um aluno existente.",
+        "parameters": [
+          {
+            "name": "id_aluno",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do aluno a ser atualizado"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados atualizados do aluno",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Cypher"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "123.456.789-00"
+                },
+                "nascimento": {
+                  "type": "string",
+                  "example": "2000-01-01"
+                },
+                "sexo": {
+                  "type": "string",
+                  "example": "Masculino"
+                },
+                "endereco": {
+                  "type": "string",
+                  "example": "Rua B, 456"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "9876-5432"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Aluno atualizado com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Aluno não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Aluno"
+        ],
+        "summary": "Atualização parcial de um aluno",
+        "description": "Endpoint para atualização parcial das informações de um aluno existente.",
+        "parameters": [
+          {
+            "name": "id_aluno",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do aluno a ser atualizado"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados parciais atualizados do aluno",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Cypher"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "123.456.789-00"
+                },
+                "nascimento": {
+                  "type": "string",
+                  "example": "2000-01-01"
+                },
+                "sexo": {
+                  "type": "string",
+                  "example": "Masculino"
+                },
+                "endereco": {
+                  "type": "string",
+                  "example": "Rua B, 456"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "9876-5432"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Aluno atualizado com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Aluno não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/aluno_avaliacao": {
+      "get": {
+        "tags": [
+          "Aluno Avaliacao"
+        ],
+        "summary": "Obter todas as avaliações de alunos",
+        "description": "Endpoint para obter a lista de todas as avaliações dos alunos.",
+        "responses": {
+          "200": {
+            "description": "Lista de avaliações obtida com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id_avaliacao": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "data_avaliacao": {
+                    "type": "string",
+                    "example": "2023-05-01"
+                  },
+                  "altura": {
+                    "type": "number",
+                    "example": 1.75
+                  },
+                  "peso": {
+                    "type": "number",
+                    "example": 70.5
+                  },
+                  "ombros": {
+                    "type": "number",
+                    "example": 45
+                  },
+                  "peitoral": {
+                    "type": "number",
+                    "example": 90
+                  },
+                  "abdomen": {
+                    "type": "number",
+                    "example": 80
+                  },
+                  "quadril": {
+                    "type": "number",
+                    "example": 95
+                  },
+                  "bracos": {
+                    "type": "number",
+                    "example": 30
+                  },
+                  "pernas": {
+                    "type": "number",
+                    "example": 50
+                  },
+                  "id_aluno": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "id_personal": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Aluno Avaliacao"
+        ],
+        "summary": "Adicionar uma nova avaliação de aluno",
+        "description": "Endpoint para adicionar uma nova avaliação de um aluno.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados da nova avaliação a ser inserida",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data_avaliacao": {
+                  "type": "string",
+                  "example": "2023-05-01"
+                },
+                "altura": {
+                  "type": "number",
+                  "example": 1.75
+                },
+                "peso": {
+                  "type": "number",
+                  "example": 70.5
+                },
+                "ombros": {
+                  "type": "number",
+                  "example": 45
+                },
+                "peitoral": {
+                  "type": "number",
+                  "example": 90
+                },
+                "abdomen": {
+                  "type": "number",
+                  "example": 80
+                },
+                "quadril": {
+                  "type": "number",
+                  "example": 95
+                },
+                "bracos": {
+                  "type": "number",
+                  "example": 30
+                },
+                "pernas": {
+                  "type": "number",
+                  "example": 50
+                },
+                "id_aluno": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_personal": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Avaliação criada com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/aluno_avaliacao/{id_aluno_avaliacao}": {
+      "delete": {
+        "tags": [
+          "Aluno Avaliacao"
+        ],
+        "summary": "Deletar uma avaliação de aluno",
+        "description": "Endpoint para deletar uma avaliação de aluno existente.",
+        "parameters": [
+          {
+            "name": "id_aluno_avaliacao",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da avaliação a ser deletada"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Avaliação deletada com sucesso."
+          },
+          "204": {
+            "description": "Nenhum Conteúdo"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Avaliação não encontrada."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Aluno Avaliacao"
+        ],
+        "summary": "Atualizar uma avaliação de aluno",
+        "description": "Endpoint para atualizar as informações de uma avaliação de aluno existente.",
+        "parameters": [
+          {
+            "name": "id_aluno_avaliacao",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da avaliação a ser atualizada"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados atualizados da avaliação",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data_avaliacao": {
+                  "type": "string",
+                  "example": "2023-05-01"
+                },
+                "altura": {
+                  "type": "number",
+                  "example": 1.75
+                },
+                "peso": {
+                  "type": "number",
+                  "example": 70.5
+                },
+                "ombros": {
+                  "type": "number",
+                  "example": 45
+                },
+                "peitoral": {
+                  "type": "number",
+                  "example": 90
+                },
+                "abdomen": {
+                  "type": "number",
+                  "example": 80
+                },
+                "quadril": {
+                  "type": "number",
+                  "example": 95
+                },
+                "bracos": {
+                  "type": "number",
+                  "example": 30
+                },
+                "pernas": {
+                  "type": "number",
+                  "example": 50
+                },
+                "id_aluno": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_personal": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Avaliação atualizada com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Avaliação não encontrada."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Aluno Avaliacao"
+        ],
+        "summary": "Atualização parcial de uma avaliação de aluno",
+        "description": "Endpoint para atualização parcial das informações de uma avaliação de aluno existente.",
+        "parameters": [
+          {
+            "name": "id_aluno_avaliacao",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da avaliação a ser atualizada"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados parciais atualizados da avaliação",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data_avaliacao": {
+                  "type": "string",
+                  "example": "2023-05-01"
+                },
+                "altura": {
+                  "type": "number",
+                  "example": 1.75
+                },
+                "peso": {
+                  "type": "number",
+                  "example": 70.5
+                },
+                "ombros": {
+                  "type": "number",
+                  "example": 45
+                },
+                "peitoral": {
+                  "type": "number",
+                  "example": 90
+                },
+                "abdomen": {
+                  "type": "number",
+                  "example": 80
+                },
+                "quadril": {
+                  "type": "number",
+                  "example": 95
+                },
+                "bracos": {
+                  "type": "number",
+                  "example": 30
+                },
+                "pernas": {
+                  "type": "number",
+                  "example": 50
+                },
+                "id_aluno": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_personal": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Avaliação atualizada com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Avaliação não encontrada."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/aluno_plano": {
+      "get": {
+        "tags": [
+          "Aluno plano"
+        ],
+        "summary": "Obter todas as associações aluno_plano",
+        "description": "Endpoint para obter a lista de todas as associações aluno_plano.",
+        "responses": {
+          "200": {
+            "description": "Lista de associações aluno_plano obtida com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id_aluno_plano": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "id_aluno": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "id_plano": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "data_inicio": {
+                    "type": "string",
+                    "example": "2024-01-01"
+                  },
+                  "data_fim": {
+                    "type": "string",
+                    "example": "2024-12-31"
+                  },
+                  "observacao": {
+                    "type": "string",
+                    "example": "Nenhuma"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Aluno plano"
+        ],
+        "summary": "Adicionar uma nova associação aluno_plano",
+        "description": "Endpoint para adicionar uma nova associação aluno_plano.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados da nova associação aluno_plano a ser inserida",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_aluno": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_plano": {
+                  "type": "number",
+                  "example": 1
+                },
+                "data_inicio": {
+                  "type": "string",
+                  "example": "2024-01-01"
+                },
+                "data_fim": {
+                  "type": "string",
+                  "example": "2024-12-31"
+                },
+                "observacao": {
+                  "type": "string",
+                  "example": "Nenhuma"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Associação aluno_plano criada com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/aluno_plano/{id_aluno_plano}": {
+      "delete": {
+        "tags": [
+          "Aluno plano"
+        ],
+        "summary": "Deletar uma associação aluno_plano",
+        "description": "Endpoint para deletar uma associação aluno_plano existente.",
+        "parameters": [
+          {
+            "name": "id_aluno_plano",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da associação aluno_plano a ser deletada"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Associação aluno_plano deletada com sucesso."
+          },
+          "204": {
+            "description": "Nenhum Conteúdo"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Associação aluno_plano não encontrada."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Aluno plano"
+        ],
+        "summary": "Atualizar uma associação aluno_plano",
+        "description": "Endpoint para atualizar as informações de uma associação aluno_plano existente.",
+        "parameters": [
+          {
+            "name": "id_aluno_plano",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da associação aluno_plano a ser atualizada"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados atualizados da associação aluno_plano",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_aluno": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_plano": {
+                  "type": "number",
+                  "example": 1
+                },
+                "data_inicio": {
+                  "type": "string",
+                  "example": "2024-01-01"
+                },
+                "data_fim": {
+                  "type": "string",
+                  "example": "2024-12-31"
+                },
+                "observacao": {
+                  "type": "string",
+                  "example": "Atualizada"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Associação aluno_plano atualizada com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Associação aluno_plano não encontrada."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Aluno plano"
+        ],
+        "summary": "Atualização parcial de uma associação aluno_plano",
+        "description": "Endpoint para atualização parcial das informações de uma associação aluno_plano existente.",
+        "parameters": [
+          {
+            "name": "id_aluno_plano",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da associação aluno_plano a ser atualizada"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados parciais atualizados da associação aluno_plano",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_aluno": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_plano": {
+                  "type": "number",
+                  "example": 1
+                },
+                "data_inicio": {
+                  "type": "string",
+                  "example": "2024-01-01"
+                },
+                "data_fim": {
+                  "type": "string",
+                  "example": "2024-12-31"
+                },
+                "observacao": {
+                  "type": "string",
+                  "example": "Parcialmente atualizada"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Associação aluno_plano atualizada com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Associação aluno_plano não encontrada."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/pagamento": {
+      "get": {
+        "tags": [
+          "Pagamento"
+        ],
+        "summary": "Obter todos os pagamentos",
+        "description": "Endpoint para obter a lista de todos os pagamentos.",
+        "responses": {
+          "200": {
+            "description": "Lista de pagamentos obtida com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id_pagamento": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "pago": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "data_limite": {
+                    "type": "string",
+                    "example": "2024-06-01"
+                  },
+                  "data_pagamento": {
+                    "type": "string",
+                    "example": "2024-05-31"
+                  },
+                  "parcela": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "id_plano": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "id_aluno": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Pagamento"
+        ],
+        "summary": "Adicionar um novo pagamento",
+        "description": "Endpoint para adicionar um novo pagamento.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do novo pagamento a ser inserido",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pago": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "data_limite": {
+                  "type": "string",
+                  "example": "2024-06-01"
+                },
+                "data_pagamento": {
+                  "type": "string",
+                  "example": "2024-05-31"
+                },
+                "parcela": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_plano": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_aluno": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Pagamento criado com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/pagamento/{id_pagamento}": {
+      "delete": {
+        "tags": [
+          "Pagamento"
+        ],
+        "summary": "Deletar um pagamento",
+        "description": "Endpoint para deletar um pagamento existente.",
+        "parameters": [
+          {
+            "name": "id_pagamento",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do pagamento a ser deletado"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pagamento deletado com sucesso."
+          },
+          "204": {
+            "description": "Nenhum Conteúdo"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Pagamento não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Pagamento"
+        ],
+        "summary": "Atualizar um pagamento",
+        "description": "Endpoint para atualizar as informações de um pagamento existente.",
+        "parameters": [
+          {
+            "name": "id_pagamento",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do pagamento a ser atualizado"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados atualizados do pagamento",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pago": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "data_limite": {
+                  "type": "string",
+                  "example": "2024-06-01"
+                },
+                "data_pagamento": {
+                  "type": "string",
+                  "example": "2024-05-31"
+                },
+                "parcela": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_plano": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_aluno": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pagamento atualizado com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Pagamento não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Pagamento"
+        ],
+        "summary": "Atualização parcial de um pagamento",
+        "description": "Endpoint para atualização parcial das informações de um pagamento existente.",
+        "parameters": [
+          {
+            "name": "id_pagamento",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do pagamento a ser atualizado"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados parciais atualizados do pagamento",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pago": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "data_limite": {
+                  "type": "string",
+                  "example": "2024-06-01"
+                },
+                "data_pagamento": {
+                  "type": "string",
+                  "example": "2024-05-31"
+                },
+                "parcela": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_plano": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_aluno": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pagamento atualizado com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Pagamento não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/personal": {
+      "get": {
+        "tags": [
+          "Personal"
+        ],
+        "summary": "Obter todos os personal trainers",
+        "description": "Endpoint para obter a lista de todos os personal trainers.",
+        "responses": {
+          "200": {
+            "description": "Lista de personal trainers obtida com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id_personal": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "nome": {
+                    "type": "string",
+                    "example": "João Silva"
+                  },
+                  "cpf": {
+                    "type": "string",
+                    "example": "123.456.789-10"
+                  },
+                  "telefone": {
+                    "type": "string",
+                    "example": "11999999999"
+                  },
+                  "sexo": {
+                    "type": "string",
+                    "example": "M"
+                  },
+                  "nascimento": {
+                    "type": "string",
+                    "example": "1980-01-01"
+                  },
+                  "cref": {
+                    "type": "number",
+                    "example": 12345
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Personal"
+        ],
+        "summary": "Adicionar um novo personal trainer",
+        "description": "Endpoint para adicionar um novo personal trainer.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do novo personal trainer a ser inserido",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "João Silva"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "123.456.789-10"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "11999999999"
+                },
+                "sexo": {
+                  "type": "string",
+                  "example": "M"
+                },
+                "nascimento": {
+                  "type": "string",
+                  "example": "1980-01-01"
+                },
+                "cref": {
+                  "type": "number",
+                  "example": 12345
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Personal trainer criado com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/personal/{id_personal}": {
+      "delete": {
+        "tags": [
+          "Personal"
+        ],
+        "summary": "Deletar um personal trainer",
+        "description": "Endpoint para deletar um personal trainer existente.",
+        "parameters": [
+          {
+            "name": "id_personal",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do personal trainer a ser deletado"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personal trainer deletado com sucesso."
+          },
+          "204": {
+            "description": "Nenhum Conteúdo"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Personal trainer não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Personal"
+        ],
+        "summary": "Atualizar um personal trainer",
+        "description": "Endpoint para atualizar as informações de um personal trainer existente.",
+        "parameters": [
+          {
+            "name": "id_personal",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do personal trainer a ser atualizado"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados atualizados do personal trainer",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "João Silva"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "123.456.789-10"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "11999999999"
+                },
+                "sexo": {
+                  "type": "string",
+                  "example": "M"
+                },
+                "nascimento": {
+                  "type": "string",
+                  "example": "1980-01-01"
+                },
+                "cref": {
+                  "type": "number",
+                  "example": 12345
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personal trainer atualizado com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Personal trainer não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Personal"
+        ],
+        "summary": "Atualização parcial de um personal trainer",
+        "description": "Endpoint para atualização parcial das informações de um personal trainer existente.",
+        "parameters": [
+          {
+            "name": "id_personal",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do personal trainer a ser atualizado"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados parciais atualizados do personal trainer",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "João Silva"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "123.456.789-10"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "11999999999"
+                },
+                "sexo": {
+                  "type": "string",
+                  "example": "M"
+                },
+                "nascimento": {
+                  "type": "string",
+                  "example": "1980-01-01"
+                },
+                "cref": {
+                  "type": "number",
+                  "example": 12345
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personal trainer atualizado com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Personal trainer não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/modalidade": {
+      "get": {
+        "tags": [
+          "Modalidade"
+        ],
+        "summary": "Obter todas as modalidades",
+        "description": "Endpoint para obter a lista de todas as modalidades.",
+        "responses": {
+          "200": {
+            "description": "Lista de modalidades obtida com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id_modalidade": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "nome": {
+                    "type": "string",
+                    "example": "Yoga"
+                  },
+                  "descricao": {
+                    "type": "string",
+                    "example": "Aulas de Yoga para iniciantes"
+                  },
+                  "hora_inicio": {
+                    "type": "string",
+                    "example": "08:00"
+                  },
+                  "hora_fim": {
+                    "type": "string",
+                    "example": "09:00"
+                  },
+                  "capacidademaxima": {
+                    "type": "number",
+                    "example": 20
+                  },
+                  "diassemana": {
+                    "type": "string",
+                    "example": "Segunda, Quarta, Sexta"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Modalidade"
+        ],
+        "summary": "Adicionar uma nova modalidade",
+        "description": "Endpoint para adicionar uma nova modalidade.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados da nova modalidade a ser inserida",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Yoga"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "Aulas de Yoga para iniciantes"
+                },
+                "hora_inicio": {
+                  "type": "string",
+                  "example": "08:00"
+                },
+                "hora_fim": {
+                  "type": "string",
+                  "example": "09:00"
+                },
+                "capacidademaxima": {
+                  "type": "number",
+                  "example": 20
+                },
+                "diassemana": {
+                  "type": "string",
+                  "example": "Segunda, Quarta, Sexta"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Modalidade criada com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/modalidade/{id_modalidade}": {
+      "delete": {
+        "tags": [
+          "Modalidade"
+        ],
+        "summary": "Deletar uma modalidade",
+        "description": "Endpoint para deletar uma modalidade existente.",
+        "parameters": [
+          {
+            "name": "id_modalidade",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da modalidade a ser deletada"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Modalidade deletada com sucesso."
+          },
+          "204": {
+            "description": "Nenhum Conteúdo"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Modalidade não encontrada."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Modalidade"
+        ],
+        "summary": "Atualizar uma modalidade",
+        "description": "Endpoint para atualizar as informações de uma modalidade existente.",
+        "parameters": [
+          {
+            "name": "id_modalidade",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da modalidade a ser atualizada"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados atualizados da modalidade",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Yoga"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "Aulas de Yoga para iniciantes"
+                },
+                "hora_inicio": {
+                  "type": "string",
+                  "example": "08:00"
+                },
+                "hora_fim": {
+                  "type": "string",
+                  "example": "09:00"
+                },
+                "capacidademaxima": {
+                  "type": "number",
+                  "example": 20
+                },
+                "diassemana": {
+                  "type": "string",
+                  "example": "Segunda, Quarta, Sexta"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Modalidade atualizada com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Modalidade não encontrada."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Modalidade"
+        ],
+        "summary": "Atualização parcial de uma modalidade",
+        "description": "Endpoint para atualização parcial das informações de uma modalidade existente.",
+        "parameters": [
+          {
+            "name": "id_modalidade",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da modalidade a ser atualizada"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados parciais atualizados da modalidade",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Yoga"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "Aulas de Yoga para iniciantes"
+                },
+                "hora_inicio": {
+                  "type": "string",
+                  "example": "08:00"
+                },
+                "hora_fim": {
+                  "type": "string",
+                  "example": "09:00"
+                },
+                "capacidademaxima": {
+                  "type": "number",
+                  "example": 20
+                },
+                "diassemana": {
+                  "type": "string",
+                  "example": "Segunda, Quarta, Sexta"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Modalidade atualizada com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Modalidade não encontrada."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/personal_modalidade": {
+      "get": {
+        "tags": [
+          "Personal Modalidade"
+        ],
+        "summary": "Obter todas as associações entre personal e modalidade",
+        "description": "Endpoint para obter a lista de todas as associações entre personal e modalidade.",
+        "responses": {
+          "200": {
+            "description": "Lista de associações obtida com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id_personal_modalidade": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "id_personal": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "id_modalidade": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "hora_entrada": {
+                    "type": "string",
+                    "example": "08:00"
+                  },
+                  "hora_saida": {
+                    "type": "string",
+                    "example": "10:00"
+                  },
+                  "id_status": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Personal Modalidade"
+        ],
+        "summary": "Adicionar uma nova associação entre personal e modalidade",
+        "description": "Endpoint para adicionar uma nova associação entre personal e modalidade.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados da nova associação a ser inserida",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_personal": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_modalidade": {
+                  "type": "number",
+                  "example": 1
+                },
+                "hora_entrada": {
+                  "type": "string",
+                  "example": "08:00"
+                },
+                "hora_saida": {
+                  "type": "string",
+                  "example": "10:00"
+                },
+                "id_status": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Associação criada com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/personal_modalidade/{id_personal_modalidade}": {
+      "delete": {
+        "tags": [
+          "Personal Modalidade"
+        ],
+        "summary": "Deletar uma associação entre personal e modalidade",
+        "description": "Endpoint para deletar uma associação existente entre personal e modalidade.",
+        "parameters": [
+          {
+            "name": "id_personal_modalidade",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da associação a ser deletada"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Associação deletada com sucesso."
+          },
+          "204": {
+            "description": "Nenhum Conteúdo"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Associação não encontrada."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Personal Modalidade"
+        ],
+        "summary": "Atualizar uma associação entre personal e modalidade",
+        "description": "Endpoint para atualizar as informações de uma associação existente entre personal e modalidade.",
+        "parameters": [
+          {
+            "name": "id_personal_modalidade",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da associação a ser atualizada"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados atualizados da associação",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_personal": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_modalidade": {
+                  "type": "number",
+                  "example": 1
+                },
+                "hora_entrada": {
+                  "type": "string",
+                  "example": "08:00"
+                },
+                "hora_saida": {
+                  "type": "string",
+                  "example": "10:00"
+                },
+                "id_status": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Associação atualizada com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Associação não encontrada."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Personal Modalidade"
+        ],
+        "summary": "Atualização parcial de uma associação entre personal e modalidade",
+        "description": "Endpoint para atualização parcial das informações de uma associação existente entre personal e modalidade.",
+        "parameters": [
+          {
+            "name": "id_personal_modalidade",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da associação a ser atualizada"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados parciais atualizados da associação",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_personal": {
+                  "type": "number",
+                  "example": 1
+                },
+                "id_modalidade": {
+                  "type": "number",
+                  "example": 1
+                },
+                "hora_entrada": {
+                  "type": "string",
+                  "example": "08:00"
+                },
+                "hora_saida": {
+                  "type": "string",
+                  "example": "10:00"
+                },
+                "id_status": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Associação atualizada com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Associação não encontrada."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "tags": [
+          "Status"
+        ],
+        "summary": "Obter todos os status",
+        "description": "Endpoint para obter a lista de todos os status.",
+        "responses": {
+          "200": {
+            "description": "Lista de status obtida com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id_status": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "situacao": {
+                    "type": "string",
+                    "example": "Ativo"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Status"
+        ],
+        "summary": "Adicionar um novo status",
+        "description": "Endpoint para adicionar um novo status.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do novo status a ser inserido",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "situacao": {
+                  "type": "string",
+                  "example": "Ativo"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Status criado com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/status/{id_status}": {
+      "delete": {
+        "tags": [
+          "Status"
+        ],
+        "summary": "Deletar um status",
+        "description": "Endpoint para deletar um status existente.",
+        "parameters": [
+          {
+            "name": "id_status",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do status a ser deletado"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status deletado com sucesso."
+          },
+          "204": {
+            "description": "Nenhum Conteúdo"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Status não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Status"
+        ],
+        "summary": "Atualização parcial de um status",
+        "description": "Endpoint para atualização parcial das informações de um status existente.",
+        "parameters": [
+          {
+            "name": "id_status",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do status a ser atualizado"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados parciais atualizados do status",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "situacao": {
+                  "type": "string",
+                  "example": "Inativo"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status atualizado com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Status não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/plano": {
+      "get": {
+        "tags": [
+          "Plano"
+        ],
+        "summary": "Obter todos os planos",
+        "description": "Endpoint para obter a lista de todos os planos.",
+        "responses": {
+          "200": {
+            "description": "Lista de planos obtida com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id_plano": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "nome": {
+                    "type": "string",
+                    "example": "Basic"
+                  },
+                  "valor": {
+                    "type": "number",
+                    "example": 99.99
+                  },
+                  "periodo": {
+                    "type": "number",
+                    "example": 12
+                  },
+                  "id_modalidade": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "id_status": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Plano"
+        ],
+        "summary": "Adicionar um novo plano",
+        "description": "Endpoint para adicionar um novo plano.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do novo plano a ser inserido",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Premium"
+                },
+                "valor": {
+                  "type": "number",
+                  "example": 199.99
+                },
+                "periodo": {
+                  "type": "number",
+                  "example": 6
+                },
+                "id_modalidade": {
+                  "type": "number",
+                  "example": 2
+                },
+                "id_status": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Plano criado com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/plano/{id_plano}": {
+      "delete": {
+        "tags": [
+          "Plano"
+        ],
+        "summary": "Deletar um plano",
+        "description": "Endpoint para deletar um plano existente.",
+        "parameters": [
+          {
+            "name": "id_plano",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do plano a ser deletado"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plano deletado com sucesso."
+          },
+          "204": {
+            "description": "Nenhum Conteúdo"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Plano não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Plano"
+        ],
+        "summary": "Atualizar um plano",
+        "description": "Endpoint para atualizar as informações de um plano existente.",
+        "parameters": [
+          {
+            "name": "id_plano",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do plano a ser atualizado"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados atualizados do plano",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Premium"
+                },
+                "valor": {
+                  "type": "number",
+                  "example": 199.99
+                },
+                "periodo": {
+                  "type": "number",
+                  "example": 6
+                },
+                "id_modalidade": {
+                  "type": "number",
+                  "example": 2
+                },
+                "id_status": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plano atualizado com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Plano não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Plano"
+        ],
+        "summary": "Atualização parcial de um plano",
+        "description": "Endpoint para atualização parcial das informações de um plano existente.",
+        "parameters": [
+          {
+            "name": "id_plano",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do plano a ser atualizado"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados parciais atualizados do plano",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Premium"
+                },
+                "valor": {
+                  "type": "number",
+                  "example": 199.99
+                },
+                "periodo": {
+                  "type": "number",
+                  "example": 6
+                },
+                "id_modalidade": {
+                  "type": "number",
+                  "example": 2
+                },
+                "id_status": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plano atualizado com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Plano não encontrado."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    }
+  }
+}

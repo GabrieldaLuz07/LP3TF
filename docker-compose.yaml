@@ -1,0 +1,18 @@
+version: "3"
+services:
+  api-gym:
+    image: apigym
+    container_name: apigym
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db-gym
+  db-gym:
+    image: gymdb
+    container_name: gymdb
+    environment:
+      ENV POSTGRES_USER: admin
+      ENV POSTGRES_PASSWORD: 123456
+      ENV POSTGRES_DB: trabalhofinal
+    ports:
+      - "5435:5432"
